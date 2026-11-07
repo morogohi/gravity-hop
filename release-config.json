@@ -1,0 +1,17 @@
+{
+  "_help": "출시 전에 이 파일만 채우고 configure.bat 를 더블클릭하세요. 모든 프로젝트 파일에 한 번에 반영됩니다.",
+  "appId": "com.orbithop.game",
+  "versionName": "2.0",
+  "versionCode": 3,
+  "developerName": "",
+  "contactEmail": "",
+  "admob": {
+    "publisherId": "",
+    "androidAppId": "",
+    "iosAppId": "",
+    "androidRewarded": "",
+    "androidInterstitial": "",
+    "iosRewarded": "",
+    "iosInterstitial": ""
+  }
+}

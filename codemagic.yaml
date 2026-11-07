@@ -1,0 +1,42 @@
+# Codemagic: iOS build → TestFlight without a Mac.
+# Before the first run, change the three values marked ★ (see the deployment guide, section 2-2).
+workflows:
+  ios-release:
+    name: iOS → TestFlight
+    max_build_duration: 60
+    instance_type: mac_mini_m2          # personal accounts: 500 free min/month on M2
+    integrations:
+      app_store_connect: OrbitHop ASC   # ★ name you gave the API key in Codemagic > Integrations > Developer Portal
+    environment:
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.orbithop.game   # ★ your final bundle ID
+      vars:
+        XCODE_PROJECT: ios/App/App.xcodeproj
+        XCODE_SCHEME: App
+        APP_STORE_APPLE_ID: 0000000000          # ★ App Store Connect > App Information > Apple ID (numbers)
+      node: 22
+      xcode: latest                             # Xcode 26+ is mandatory for uploads since 2026-04-28
+    scripts:
+      - name: Install dependencies
+        script: npm ci
+      - name: Copy web assets into the iOS project
+        script: npx cap sync ios
+      - name: Apply signing profiles
+        script: xcode-project use-profiles
+      - name: Build signed IPA (build number = latest on App Store Connect + 1)
+        script: |
+          LATEST=$(app-store-connect get-latest-app-store-build-number "$APP_STORE_APPLE_ID" 2>/dev/null || echo 1)
+          NEXT=$((LATEST + 1))
+          echo "Build number: $NEXT"
+          xcode-project build-ipa \
+            --project "$XCODE_PROJECT" \
+            --scheme "$XCODE_SCHEME" \
+            --archive-xcargs "CURRENT_PROJECT_VERSION=$NEXT"
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true

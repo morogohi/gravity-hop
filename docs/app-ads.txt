@@ -1,0 +1,4 @@
+# Upload this file to the ROOT of the developer website you list in Google Play / App Store
+# (e.g. https://yourdomain.com/app-ads.txt). Replace pub-XXXXXXXXXXXXXXXX with your AdMob publisher ID
+# (AdMob console > Settings > Account information).
+google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0

@@ -1,0 +1,26 @@
+{
+  "name": "orbit-hop",
+  "version": "2.0.0",
+  "description": "궤도 점프 · ORBIT HOP — hyper-casual one-tap game",
+  "scripts": {
+    "sync": "cap sync",
+    "android": "cap sync android && cap open android",
+    "ios": "cap sync ios && cap open ios",
+    "run:android": "cap run android",
+    "run:ios": "cap run ios",
+    "assets": "capacitor-assets generate --iconBackgroundColor \"#07061a\" --splashBackgroundColor \"#07061a\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@capacitor-community/admob": "^8.3.0",
+    "@capacitor/android": "^8.6.0",
+    "@capacitor/core": "^8.6.0",
+    "@capacitor/ios": "^8.6.0"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "^4.0.0",
+    "@capacitor/cli": "^8.6.0"
+  }
+}

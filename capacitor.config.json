@@ -1,0 +1,13 @@
+{
+  "appId": "com.orbithop.game",
+  "appName": "그래비티 홉",
+  "webDir": "www",
+  "backgroundColor": "#07061a",
+  "android": {
+    "backgroundColor": "#07061a"
+  },
+  "ios": {
+    "backgroundColor": "#07061a",
+    "contentInset": "never"
+  }
+}

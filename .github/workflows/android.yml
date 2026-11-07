@@ -1,0 +1,56 @@
+name: Android build
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Install & sync Capacitor
+        run: |
+          npm ci
+          npx cap sync android
+
+      - name: Build debug APK
+        working-directory: android
+        run: ./gradlew assembleDebug --no-daemon
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: orbit-hop-debug-apk
+          path: android/app/build/outputs/apk/debug/*.apk
+
+      # Signed release AAB for Google Play — runs only when the keystore secret is set.
+      # Secrets: ORBIT_KEYSTORE_BASE64, ORBIT_KEYSTORE_PASSWORD, ORBIT_KEY_ALIAS, ORBIT_KEY_PASSWORD
+      - name: Build signed release AAB
+        if: ${{ env.KS != '' }}
+        env:
+          KS: ${{ secrets.ORBIT_KEYSTORE_BASE64 }}
+          ORBIT_KEYSTORE_PASSWORD: ${{ secrets.ORBIT_KEYSTORE_PASSWORD }}
+          ORBIT_KEY_ALIAS: ${{ secrets.ORBIT_KEY_ALIAS }}
+          ORBIT_KEY_PASSWORD: ${{ secrets.ORBIT_KEY_PASSWORD }}
+        working-directory: android
+        run: |
+          echo "$KS" | base64 -d > "$RUNNER_TEMP/upload.jks"
+          ORBIT_KEYSTORE_PATH="$RUNNER_TEMP/upload.jks" ./gradlew bundleRelease --no-daemon
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ hashFiles('android/app/build/outputs/bundle/release/*.aab') != '' }}
+        with:
+          name: orbit-hop-release-aab
+          path: android/app/build/outputs/bundle/release/*.aab
