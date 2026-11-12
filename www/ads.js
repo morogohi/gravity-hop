@@ -10,17 +10,17 @@
  * and set TESTING = false. (App IDs go in AndroidManifest/strings.xml and Info.plist.)
  */
 (function () {
-  const TESTING = true;
+  const TESTING = false;
 
   // Google's official demo ad unit IDs (safe to use during development).
   const UNITS = {
     android: {
-      rewarded:     'ca-app-pub-3940256099942544/5224354917',
-      interstitial: 'ca-app-pub-3940256099942544/1033173712'
+      rewarded:     'ca-app-pub-8387477370861262/3084437607',
+      interstitial: 'ca-app-pub-8387477370861262/1987124144'
     },
     ios: {
-      rewarded:     'ca-app-pub-3940256099942544/1712485313',
-      interstitial: 'ca-app-pub-3940256099942544/4411468910'
+      rewarded:     'ca-app-pub-8387477370861262/1268938847',
+      interstitial: 'ca-app-pub-8387477370861262/7810296466'
     }
   };
 

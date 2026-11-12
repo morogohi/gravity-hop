@@ -5,5 +5,5 @@
     <string name="package_name">com.orbithop.game</string>
     <string name="custom_url_scheme">com.orbithop.game</string>
     <!-- TEST AdMob App ID. Replace with your own: ca-app-pub-XXXXXXXXXXXXXXXX~YYYYYYYYYY -->
-    <string name="admob_app_id">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="admob_app_id">ca-app-pub-8387477370861262~9339000550</string>
 </resources>

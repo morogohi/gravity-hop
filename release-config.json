@@ -6,12 +6,12 @@
   "developerName": "",
   "contactEmail": "",
   "admob": {
-    "publisherId": "",
-    "androidAppId": "",
-    "iosAppId": "",
-    "androidRewarded": "",
-    "androidInterstitial": "",
-    "iosRewarded": "",
-    "iosInterstitial": ""
+    "publisherId": "pub-8387477370861262",
+    "androidAppId": "ca-app-pub-8387477370861262~9339000550",
+    "iosAppId": "ca-app-pub-8387477370861262~8145192597",
+    "androidRewarded": "ca-app-pub-8387477370861262/3084437607",
+    "androidInterstitial": "ca-app-pub-8387477370861262/1987124144",
+    "iosRewarded": "ca-app-pub-8387477370861262/1268938847",
+    "iosInterstitial": "ca-app-pub-8387477370861262/7810296466"
   }
 }
